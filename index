@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Básica</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+        }
+
+        .calculadora {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            font-size: 24px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            text-align: right;
+            box-sizing: border-box;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            padding: 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .numero, .decimal {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .operador {
+            background: #667eea;
+            color: white;
+        }
+
+        .igual {
+            background: #48bb78;
+            color: white;
+            grid-column: span 2;
+        }
+
+        .limpiar {
+            background: #f56565;
+            color: white;
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculadora">
+        <input type="text" id="pantalla" readonly>
+        <div class="buttons">
+            <button class="limpiar" onclick="limpiar()">C</button>
+            <button class="operador" onclick="agregar('/')">/</button>
+            <button class="operador" onclick="agregar('')"></button>
+
+            <button class="numero" onclick="agregar('7')">7</button>
+            <button class="numero" onclick="agregar('8')">8</button>
+            <button class="numero" onclick="agregar('9')">9</button>
+            <button class="operador" onclick="agregar('-')">-</button>
+
+            <button class="numero" onclick="agregar('4')">4</button>
+            <button class="numero" onclick="agregar('5')">5</button>
+            <button class="numero" onclick="agregar('6')">6</button>
+            <button class="operador" onclick="agregar('+')">+</button>
+
+            <button class="numero" onclick="agregar('1')">1</button>
+            <button class="numero" onclick="agregar('2')">2</button>
+            <button class="numero" onclick="agregar('3')">3</button>
+            <button class="decimal" onclick="agregar('.')">.</button>
+
+            <button class="numero" onclick="agregar('0')">0</button>
+            <button class="igual" onclick="calcular()">=</button>
+        </div>
+    </div>
+
+    <script>
+        function agregar(valor) {
+            document.getElementById('pantalla').value += valor;
+        }
+
+        function limpiar() {
+            document.getElementById('pantalla').value = '';
+        }
+
+        function calcular() {
+            const pantalla = document.getElementById('pantalla');
+            try {
+                pantalla.value = eval(pantalla.value);
+            } catch (error) {
+                pantalla.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
